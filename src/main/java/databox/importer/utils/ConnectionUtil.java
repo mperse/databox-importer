@@ -29,6 +29,35 @@ public class ConnectionUtil {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
+	public String simpleGetRequest(ConnectionQueryParams requestParams) {
+		InputStream responseReader = null;
+		try {
+			try {
+				URL url = new URL(requestParams.buildRequestPath());
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				setConnectionProperties(conn);
+				// writeHeaders(conn, prepareHeaders(requestParams));
+
+				logger.debug("Connecting to: " + url.toString());
+				if (conn.getResponseCode() >= 300) {
+					String msg = "Error: " + conn.getResponseCode() + (conn.getErrorStream() != null ? IOUtils.toString(conn.getErrorStream(), "UTF-8") : "Connection or error stream is null.");
+					logger.error(msg);
+					throw new IOException("Failed to load data, HTTP code: " + conn.getResponseCode());
+				}
+				return printStreamData(conn.getInputStream());
+
+			} finally {
+				if (responseReader != null) {
+					responseReader.close();
+				}
+			}
+		} catch (Exception e) {
+			logger.error("Error when querying data: " + e.getLocalizedMessage(), e);
+		}
+		return null;
+	}
+
 	public <T> T executeGetRequest(ConnectionQueryParams requestParams, Class<T> valueType) {
 		InputStream responseReader = null;
 		try {

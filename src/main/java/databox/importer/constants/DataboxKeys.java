@@ -15,4 +15,9 @@ public class DataboxKeys {
 		public static final String POSTS_LAST_30_DAYS = "fb_num_posts_30";
 	}
 
+	public static final class TEMPERATURE {
+		public static final String WATER = "temp_water";
+		public static final String AIR = "temp_air";
+	}
+
 }

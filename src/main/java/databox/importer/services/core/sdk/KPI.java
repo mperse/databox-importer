@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +11,14 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import databox.importer.constants.MainConstants;
+
 public class KPI {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
 	ObjectMapper mapper = new ObjectMapper();
 
-	public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getTimeZone("UTC");
 	private static SimpleDateFormat SDF;
 
 	private String key;
@@ -29,7 +29,7 @@ public class KPI {
 
 	static {
 		SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		SDF.setTimeZone(DEFAULT_TIME_ZONE);
+		SDF.setTimeZone(MainConstants.DEFAULT_TIME_ZONE);
 	}
 
 	public KPI() {

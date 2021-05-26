@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import databox.importer.services.core.impl.FacebookServiceImpl;
 import databox.importer.services.core.impl.ParcelDataServiceImpl;
 import databox.importer.services.core.impl.SystemStatusImpl;
+import databox.importer.services.core.impl.WeatherServiceImpl;
 import databox.importer.utils.JsonObjectMapperProvider;
 
 @ApplicationPath("/")
@@ -23,7 +24,6 @@ public class DemoApplication extends Application {
 
 	public DemoApplication() {
 		super();
-
 		classes.add(JsonObjectMapperProvider.class);
 		classes.add(ParcelDataServiceImpl.class);
 		logger.info("Server Application started.");
@@ -34,6 +34,7 @@ public class DemoApplication extends Application {
 		HashSet<Object> set = new HashSet<>();
 		set.add(new SystemStatusImpl());
 		set.add(new FacebookServiceImpl());
+		set.add(new WeatherServiceImpl());
 		return set;
 	}
 

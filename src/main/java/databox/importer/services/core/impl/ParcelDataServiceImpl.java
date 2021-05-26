@@ -23,6 +23,7 @@ import databox.importer.services.core.sdk.DataboxWrapper;
 import databox.importer.services.core.sdk.KPI;
 import databox.importer.services.parcel.ParcelQueryUtil;
 import databox.importer.utils.DateFormatUtil;
+import databox.importer.utils.StringUtil;
 
 public class ParcelDataServiceImpl implements ParcelDataService {
 
@@ -40,11 +41,11 @@ public class ParcelDataServiceImpl implements ParcelDataService {
 	@Override
 	public String getParcelValue(String kosifko, String parcel) {
 
-		if (isNullOrEmpty(kosifko)) {
+		if (StringUtil.isNullOrEmpty(kosifko)) {
 			throw new BadRequestException("Please enter valid cadastral number.");
 		}
 
-		if (isNullOrEmpty(parcel)) {
+		if (StringUtil.isNullOrEmpty(parcel)) {
 			throw new BadRequestException("Please enter valid parcel number.");
 		}
 
@@ -65,14 +66,10 @@ public class ParcelDataServiceImpl implements ParcelDataService {
 		return totalVal != null ? formatter.format(totalVal) + " €" : "/";
 	}
 
-	private boolean isNullOrEmpty(String kosifko) {
-		return kosifko == null && kosifko.isEmpty();
-	}
-
 	private void generateFakeDataboxReport(Parcela parc, BigDecimal totalVal) throws ParseException, Exception {
 		databox.pushDataAndLog(getValues(totalVal, parc.getPovrsina()));
 
-		// also push information about pacel data request
+		// also push information about parcel data request
 		KPI requestKpi = new KPI().setKey(DataboxKeys.PARCEL.PARCEL_QUERY_INFO).setValue(1).setDate(new Date());
 		databox.pushDataAndLog(Collections.singletonList(requestKpi));
 	}
