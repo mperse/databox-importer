@@ -32,7 +32,7 @@ public class FacebookServiceImpl implements FacebookService {
 				((FbServiceController) existingController).updateAuthToken(authToken);
 			} else {
 				logger.info("Adding new controller.");
-				MainControllerHolder.getInstance().addControler(new FbServiceController(userId, authToken));
+				MainControllerHolder.getInstance().addController(new FbServiceController(userId, authToken));
 			}
 			return "OK";
 		} catch (Exception e) {

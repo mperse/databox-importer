@@ -26,8 +26,4 @@ public class DateFormatUtil {
 		}
 	}
 
-	/*
-	 * public static void main(String[] args) { System.out.println(DateFormatUtil.getCurrentDay()); }
-	 */
-
 }

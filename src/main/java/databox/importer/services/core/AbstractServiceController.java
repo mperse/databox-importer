@@ -19,7 +19,7 @@ public class AbstractServiceController extends Thread {
 	 *            - id in the form of 'type|id'. Use createId to generate unique identifier
 	 */
 	public boolean idMatheches(String controlerID) {
-		return controlerID != null && controlerID.equals(createId(type, id));
+		return controlerID != null && controlerID.equalsIgnoreCase(createId(type, id));
 	}
 
 	public static String createId(String type, String id) {
@@ -31,7 +31,16 @@ public class AbstractServiceController extends Thread {
 	}
 
 	public void disableAndRemove() {
-		MainControllerHolder.getInstance().removeControler(this);
+		MainControllerHolder.getInstance().removeController(this);
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public String toString() {
+		return getFullId();
 	}
 
 }

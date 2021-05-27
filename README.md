@@ -23,7 +23,7 @@ This is a demo project for Databox challenge task. The project contains the code
 
 ## Results
 
-- <span style="color:green">APIs:</span> Code implements the calls to two different APIs - the Facebook API with the Oauth2 registration and simple GURS (demo) API for obtaining Slovenian real-estate data (only implemented for land parcels). Several KPI are generated from the data of the two services:
+- <span style="color:green">APIs:</span> Code implements the calls to three different APIs - the Facebook API with the Oauth2 registration, simple GURS (demo) API for obtaining Slovenian real-estate data (only implemented for land parcels) and arso weather api. Several KPI are generated from the data of the two services:
 
   1.  The Facebook service stores the following KPIs:
 
@@ -33,9 +33,14 @@ This is a demo project for Databox challenge task. The project contains the code
       - Number of liked pages
 
   2.  GURS service stores the data about:
+
       - Records about individual service requests
       - Parcel value on individual day (the values are mocked since the original server data do not change)
       - Parcel size on individual day (the values are mocked since the original server data do not change)
+
+  3.  Weather conditions in Koper
+      - Air temerature
+      - Water temperature
 
 - <span style="color:green">Unit testing:</span> Unit tests for relevant functionality were implemented.
 
@@ -44,6 +49,7 @@ This is a demo project for Databox challenge task. The project contains the code
 - <span style="color:green">Visualization:</span> The dashboards with the visualized data can be obtained here:
   1.  https://app.databox.com/datawall/3925795b60b5ffebc85374fb4d66779a060a638a5
   2.  https://app.databox.com/datawall/e1e371da241e57985b8f0906e3d17997060a5a1a3
+  3.  https://app.databox.com/datawall/71250546eb161e0bc2e4a118cdef6673060ae3a8f
 - <span style="color:green">Logging:</span> Besides the ordinary server log (see /logs/databox_importer.log), the databox wrapper class also stores a separate file with the requested information (see logs/databoxReport.txt)
 
 ## How to run
@@ -61,8 +67,11 @@ Start the appRun task with gradle (gradle appRun) and open the local demo url ht
   2. ko:1911 p:849/38
   3. ko:2605 p:1488/13
   4. Parcel information can also be obtained from http://prostor3.gov.si/javni/login.jsp?jezik=sl).
+  5. After the query is performed and the value is displayed on the application the visualization should change displaying the mocked changes in the parcel values and increased number of performed requests.
 
-5. After the query is performed and the value is displayed on the application the visualization should change displaying the mocked changes in the parcel values and increased number of performed requests.
+- Start and stop weather update sevice.
+  1. To start: http://localhost:8080/databox-importer/data/weather/startService
+  2. To stop: http://localhost:8080/databox-importer/data/weather/stopService
 
 Enjoy !!
 

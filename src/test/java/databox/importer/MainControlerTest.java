@@ -44,17 +44,17 @@ public class MainControlerTest {
 		TestController controller2 = new TestController("2");
 
 		MainControllerHolder instance = MainControllerHolder.getInstance();
-		instance.addControler(controller1);
-		assertEquals(instance.getControlersSize(), 1);
-		instance.addControler(controller1);
-		assertEquals(instance.getControlersSize(), 1);
-		instance.addControler(controller2);
-		assertEquals(instance.getControlersSize(), 2);
+		instance.addController(controller1);
+		assertEquals(instance.getControllersSize(), 1);
+		instance.addController(controller1);
+		assertEquals(instance.getControllersSize(), 1);
+		instance.addController(controller2);
+		assertEquals(instance.getControllersSize(), 2);
 
 		controller1.disableAndRemove();
-		assertEquals(instance.getControlersSize(), 1);
+		assertEquals(instance.getControllersSize(), 1);
 		controller2.disableAndRemove();
-		assertEquals(instance.getControlersSize(), 0);
+		assertEquals(instance.getControllersSize(), 0);
 
 	}
 
