@@ -12,12 +12,11 @@ import javax.ws.rs.core.MediaType;
 @Path(ResourceBase.FB_PATH)
 public interface FacebookService {
 
-	// TODO: change this to POST method
 	@GET
 	@Path("/user/{userId}/initDataUpdater/{authToken}")
 	public String addUserDataUpdater(@PathParam("userId") String userId, @PathParam("authToken") String authToken);
 
 	@GET
 	@Path("/user/{userId}/stopDataUpdater/")
-	public String addUserDataUpdater(@PathParam("userId") String userId);
+	public String removeUserDataUpdater(@PathParam("userId") String userId);
 }
