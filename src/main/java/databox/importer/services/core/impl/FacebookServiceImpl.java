@@ -22,9 +22,6 @@ public class FacebookServiceImpl implements FacebookService {
 		if (userId == null || userId.isEmpty() || authToken == null || authToken.isEmpty()) {
 			throw new BadRequestException("Parameter 'userId' and 'authToken' must be specified!");
 		}
-		/*
-		 * try { FacebookDataUpdater updater = new FacebookDataUpdater(authToken); updater.updateUserData(); return "OK"; } catch (Exception e) { String msg = "Failed to execute update: " + e.getLocalizedMessage(); logger.error(msg, e); throw new InternalServerErrorException(e.getLocalizedMessage()); }
-		 */
 
 		try {
 			AbstractServiceController existingController = MainControllerHolder.getInstance().getController(FbServiceController.TYPE, userId);
@@ -44,7 +41,7 @@ public class FacebookServiceImpl implements FacebookService {
 	}
 
 	@Override
-	public String addUserDataUpdater(String userId) {
+	public String removeUserDataUpdater(String userId) {
 		AbstractServiceController controller = MainControllerHolder.getInstance().getController(FbServiceController.TYPE, userId);
 
 		if (controller != null) {

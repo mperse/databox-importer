@@ -56,7 +56,6 @@ public class ParcelDataServiceImpl implements ParcelDataService {
 		}
 
 		logger.debug("Parcel info:" + parcela);
-
 		BigDecimal totalVal = util.getParcelValue(parcela.getPcMid());
 		try {
 			generateFakeDataboxReport(parcela, totalVal);
