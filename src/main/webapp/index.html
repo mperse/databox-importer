@@ -2,14 +2,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="./index.css">
-<title>Facebook Login JavaScript Example</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Databox clalenge application</title>
 <meta charset="UTF-8">
 </head>
 <body>
 <script>
 
 function statusChangeCallback(response) { 
-    console.log('statusChangeCallback');
     if (response.status === 'connected' && response.authResponse) {  
       if(response.authResponse && response.authResponse.userID){ 
         updateUserData(response); 	
@@ -103,11 +103,28 @@ function stopUserDataUpdate() {
   xhttp.send();
 }
 
+function showLoader(){
+  console.log("Show loader")
+  document.getElementById('btn-search-ico').style.display = "inline-block";
+}
+
+function hideLoader(){
+  document.getElementById('btn-search-ico').style.display = "none";
+}
+
+function handleInputKey(event){
+  if (event.keyCode == 13){
+    this.calculateValue();
+  } 
+}
+
 function calculateValue() { 
     const kosifko = document.getElementById("kosifko").value;
     const parcel = document.getElementById("parcel").value;
     const url =  'data/parcel/value/' +  encodeURIComponent(kosifko) + '/' + encodeURIComponent(parcel);
-    
+
+    this.showLoader();
+
     const xhttp = new XMLHttpRequest();
   	xhttp.onload = function () {
 		  if (xhttp.status >= 200 && xhttp.status < 400) {  				
@@ -116,11 +133,13 @@ function calculateValue() {
           displayValue('Failed to obtain parcel data!');
   				console.log(xhttp.statusText);
         }
+        hideLoader();
 		}
 
     xhttp.onreadystatechange = function() {
       if (xhttp.readyState === 4 && xhttp.status === 0) {
         displayValue('Failed to connect ot server.');
+        removeLoader();
       }
     };
 
@@ -143,7 +162,7 @@ function displayValue(value) {
       <div class="title-right">
         <fb:login-button id="btn-fb-login" scope="public_profile,email" onlogin="checkLoginState();">
         </fb:login-button>
-        <button id="btn-stop-update" class="btn-stop-update" onclick="stopUserDataUpdate();" style="visibility: hidden;">Stop updating</button> <br/>
+        <button id="btn-stop-update" class="_4z_f fwb" onclick="stopUserDataUpdate();" style="visibility: hidden;">Stop updating</button> <br/>
         <div id="status"></div>
         <div id="updateState"></div>
       </div>
@@ -154,14 +173,14 @@ function displayValue(value) {
 <div id="main-content" class="main-content">
   <div class="center">
     <div class="main-content-inner">
-      <h2>Databox challenge app</h2>
+      <h2>Databox challenge application</h2>
       <p>Enter parcel cadastral and parcel number</p>
       <div id="parce-content">
-        Cadastral number<br/>
-        <input id='kosifko' type="text" value="166"> <br/><br/>
-        Parcel number<br/>
-        <input id='parcel' type="text" value="2196"> <br/><br/>
-        <button onclick="calculateValue();">Search</button> <br/><br/>
+        <b>Cadastral number</b>
+        <input id="kosifko" type="text" value="166" onkeydown = "handleInputKey(event)"> <br/><br/>
+        <b>Parcel number</b>
+        <input id="parcel" type="text" value="2196" onkeydown = "handleInputKey(event)"> <br/><br/>
+        <button id="btn-search" onclick="calculateValue();" style="padding-left: 15px;"><i id="btn-search-ico" class="fa fa-refresh fa-spin" style="display: none;"></i>Search</button> <br/><br/>
         <div id="parc-value" class="parc-value"></div>
       </div>
     </div>

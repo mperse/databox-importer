@@ -19,7 +19,7 @@ public class WeatherServiceImpl implements WeatherService {
 
 	String fullId = null;
 
-	int delayInMinutes = 2;
+	int delayInMinutes = 15;
 
 	public WeatherServiceImpl() {
 		// start service update on initialization
