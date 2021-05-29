@@ -62,7 +62,7 @@ public class ParcelDataServiceImpl implements ParcelDataService {
 		} catch (Exception e) {
 			logger.error("Failed to log data do databox: " + e.getLocalizedMessage(), e);
 		}
-		return totalVal != null ? formatter.format(totalVal) + " €" : "/";
+		return totalVal != null ? formatter.format(totalVal) + " â‚¬" : "/";
 	}
 
 	private void generateFakeDataboxReport(Parcela parc, BigDecimal totalVal) throws ParseException, Exception {
@@ -82,7 +82,7 @@ public class ParcelDataServiceImpl implements ParcelDataService {
 		c.setTime(dateFrom);
 		while (c.getTime().compareTo(dateTo) <= 0) {
 			data.add(new KPI().setKey(DataboxKeys.PARCEL.PARCEL_SIZE).setValue(getFactor(0.2) * area.doubleValue()).setDate(c.getTime()).setUnit("m2"));
-			data.add(new KPI().setKey(DataboxKeys.PARCEL.PARCEL_VALUE).setValue(getFactor(0.2) * totalVal.doubleValue()).setDate(c.getTime()).setUnit("€"));
+			data.add(new KPI().setKey(DataboxKeys.PARCEL.PARCEL_VALUE).setValue(getFactor(0.2) * totalVal.doubleValue()).setDate(c.getTime()).setUnit("ï¿½"));
 			c.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		return data;
